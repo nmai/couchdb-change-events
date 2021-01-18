@@ -108,11 +108,7 @@ class CouchdbChangeEvents extends EventEmitter {
 
 		if (messages.length > 0) {
 			for (let change of messages) {
-				let couchdbChange = JSON.parse(change, (key, value) =>
-					typeof value === 'string'
-					? value.replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0')
-					: value
-				);
+				let couchdbChange = change;
 
 				if (couchdbChange.error) {
 					const error = new Error(couchdbChange.error);
